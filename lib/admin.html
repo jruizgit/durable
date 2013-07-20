@@ -1,0 +1,132 @@
+<html>
+	<head>
+		<title>Promise Admin</title>		
+	</head>
+	<style>
+
+	path.link {
+	  fill: none;
+	  stroke: #aaa;
+	  stroke-width: 1.5px;
+	  cursor: pointer;
+	}
+
+	path.link.selected {
+	  stroke-dasharray: 10,10;  
+	}
+
+	.linkDisplay {
+	  font: 11px arial;
+	  fill: #aaa;
+	  dy: ".90em";
+	  letter-spacing: 1.5;
+	  cursor: pointer;
+	}
+
+	.node {
+	  fill-opacity: 0;
+	  stroke: steelblue;
+	  stroke-width: 1px;
+	  cursor: pointer;
+	}
+
+	.sequenceNode {
+	  fill-opacity: 0;
+	  stroke: steelblue;
+	  stroke-width: 1.5px;
+	  cursor: pointer;
+	}
+
+	.id {
+	  font: 12px arial;
+	  dy: ".35em";
+	}
+	
+	.axis line {
+	  fill: none;
+	  stroke: #000;
+	  stroke-width: 1px;
+	  shape-rendering: crispEdges;
+	}
+
+	.domain {
+	  fill: none;
+	  opacity: 1;
+	  stroke: #000;
+	  stroke-width: 1px;
+	}
+
+	.timeMarker {
+	  stroke: #000;
+	  stroke-width: 1px;
+	}
+
+	.axis text {
+	  font-size: 12px;
+	}
+
+	.label {
+	  fill: #777;
+	}
+
+	.time.label {
+	  font: 500 45px "Helvetica Neue";
+	  fill: #ddd;
+	}
+
+	.time.label.active {
+	  fill: #aaa;
+	}
+
+	.popup {
+	  fill: white;
+	  stroke: black;
+	  stroke-width: 1px;
+	}
+
+	.flowPopup {
+	  fill: white;
+	  stroke: steelblue;
+	  stroke-width: 1px;
+	}
+
+	.popupBack {
+	  fill: #aaa;
+	}
+
+	.popupProperty {
+	  font: 12px arial;
+	  dy: ".35em";
+	  text-anchor: right;
+	  font-weight: bold;
+	}
+
+	.popupValue {
+	  font: 12px arial;
+	  dy: ".35em";
+	  text-anchor: right;
+	}
+
+	</style>
+	<body>	
+		<script type="text/javascript" src="http://d3js.org/d3.v3.min.js?3.1.9"></script>		
+		<script type="text/javascript" src="/durableVisual.js"></script>		
+		<script type="text/javascript">		
+
+		var svg = d3.select("body")
+					.append("svg")
+					.attr("width", r + 200)
+					.attr("height", r + 60);
+
+		var url = window.location.pathname;
+		var history = promiseHistory(url);
+		promiseGraph(url, history).createVisual(svg, function(err) { 
+			var pad = scratchPad(url, history)
+			if (err) { 
+				pad.setStatus(err.error); 
+			} 
+		});
+
+		</script>		
+	</body>
+</html>
