@@ -159,27 +159,28 @@ durable.run({
         .checkpoint("exit"),
 
     mapreduce: durable.receive({ content: { $regex: "[0-9]*" } })
-        .mapReduce(function(s) { 
-                number = s.getOutput();
-                mapss = [];
-                for (index = 0; index < number.content; ++index)
-                {
-                    mapss[index] = { content: index };
+        .mapReduce({
+            map: function(s) { 
+                    number = s.getOutput();
+                    mapss = [];
+                    for (index = 0; index < number.content; ++index)
+                    {
+                        mapss[index] = { content: index };
+                    }
+                    console.log("Map ss :" + mapss.length);        
+                    return mapss;
+                },
+            run: durable.receive({})
+                .continueWith(function(s) { console.log("Map: " + s.content) }),
+            reduce: function(ss) {
+                        var total = 0;        
+                    for (index = 0; index < ss.length; ++index) {
+                        total = total + ss[index].content;
+                    }
+                    return { content: total };
                 }
-                console.log("Map ss :" + mapss.length);        
-                return mapss;
-            },
-            durable.receive({})
-            .continueWith(function(s) { console.log("Map: " + s.content) }),
-            function(ss) {
-                var total = 0;        
-                for (index = 0; index < ss.length; ++index) {
-                    total = total + ss[index].content;
-                }
-                return { content: total };
-            }, "map")
+        }, "map")
         .continueWith(function (s) { console.log("Reduce: " + s.content); }),
-
 
     statemachine: durable.stateChart({
         state0: {
