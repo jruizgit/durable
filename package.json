@@ -1,6 +1,6 @@
 {
   "name": "durable",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "durable state framework and server",
   "keywords": ["durable", "longrunning", "framework", "events", "transactions", "consistency", "coordination", "statemachine", "flowchart", "messaging" ],
   "dependencies": { "express": "2.5.x" , "mongodb": "1.2.14", "node-static": "0.7.0"},

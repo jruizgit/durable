@@ -47,7 +47,7 @@ else {
                 firstTransition: {
                     whenAll: { 
 						a: durable.tryReceive({ content: "a" }),                        
-						b: durable.tryCondition(function (s) { return (!s.i || s.i < 500); })
+						b: durable.tryCondition(function (s) { return (!s.i || s.i < 5000); })
 					},
                     run: durable.promise(function (s) {                        
                             if (!s.i) {
@@ -66,7 +66,7 @@ else {
                     to: "start"
                 },
                 lastTransition: {
-                    when: durable.tryCondition(function (s) { return (s.i === 500); }),
+                    when: durable.tryCondition(function (s) { return (s.i === 5000); }),
                     to: "end"
                 }
             },
@@ -79,7 +79,7 @@ else {
                 firstTransition: {
                     whenAll: { 
 						a: durable.tryReceive({ content: "b" }),                        
-						b: durable.tryCondition(function (s) { return (!s.i || s.i < 500); })
+						b: durable.tryCondition(function (s) { return (!s.i || s.i < 5000); })
 					},
                     run: durable.promise(function (s) {                        
                             if (!s.i) {
@@ -98,7 +98,7 @@ else {
                     to: "start"
                 },
                 lastTransition: {
-                    when: durable.tryCondition(function (s) { return (s.i === 500); }),
+                    when: durable.tryCondition(function (s) { return (s.i === 5000); }),
                     to: "end"
                 }
             },
