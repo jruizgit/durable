@@ -1,6 +1,6 @@
 {
   "name": "durable",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A lightweight library for coordinating long lasting event streams.",
   "keywords": ["durable", "longrunning", "framework", "events", "transactions", "consistency", "coordination", "statemachine", "flowchart", "messaging", "stateful", "workflow" ],
   "dependencies": { "express": "2.5.x" , "mongodb": "1.2.14", "node-static": "0.7.0"},
