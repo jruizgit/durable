@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Approval page</title>        
+    </head>
+    <body> 
+        <h3> Do you approve our proposal?</h3> 
+        <script type="text/javascript" src="http://d3js.org/d3.v3.min.js?3.1.9"></script>       
+        <script type="text/javascript">     
+
+        function approve() {
+            server.post("{ \"id\":\"20\", \"subject\":\"approved\" }", function(err) {
+                if (err) {
+                    alert(err.responseText);
+                }
+                else {
+                    alert("Approved");
+                }
+            });
+        }
+
+        function deny() {
+            server.post("{ \"id\":\"20\", \"subject\":\"denied\" }", function(err) {
+                if (err) {
+                    alert(err.responseText);
+                }
+                else {
+                    alert("Denied");
+                }
+            });
+        }
+
+
+        function getQueryVariables(query) {
+            query = query.substring(1);
+            var result = {};
+            var vars = query.split('&');
+            var pair;
+            for (var i = 0; i < vars.length; i++) {
+                pair = vars[i].split('=');
+                result[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+            }
+            
+            return result;
+        }
+        
+        var query = getQueryVariables(window.location.search);
+        var url = "http://localhost:5000/examples/" + query.p + "/" + query.s;
+        var server = d3.xhr(url)
+            .header("content-type", "application/json; charset=utf-8");
+
+        var body = d3.select("body");
+        body.append("input")
+            .attr("type", "button")
+            .attr("id", "approve")
+            .attr("value", "Yes")
+            .on("click", approve);
+
+        var body = d3.select("body");
+        body.append("input")
+            .attr("type", "button")
+            .attr("id", "deny")
+            .attr("value", "No")
+            .on("click", deny);
+
+        </script>       
+    </body>
+</html>

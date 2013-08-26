@@ -1,9 +1,9 @@
 {
   "name": "durable",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A lightweight library for coordinating long lasting event streams.",
   "keywords": ["durable", "longrunning", "framework", "events", "transactions", "consistency", "coordination", "statemachine", "flowchart", "messaging", "stateful", "workflow" ],
-  "dependencies": { "express": "2.5.x" , "mongodb": "1.2.14", "node-static": "0.7.0"},
+  "dependencies": { "express": "2.5.x" , "mongodb": "1.2.14", "node-static": "0.7.0", "simplesmtp": "0.3.8", "mailcomposer": "0.2.1"},
   "main" : "./lib/durable",
   "engines": { "node": "0.8.x", "npm": "1.1.x" },
   "author": { "name": "Jesus Ruiz", "email": "jr3791@live.com"}
